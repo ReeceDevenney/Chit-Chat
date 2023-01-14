@@ -1,12 +1,14 @@
 import Controlpanel from "../Controlpanel";
 import Searchbar from "../Searchbar";
+import Contactbox from "../Contactbox";
 
 function Sidebar() {
   return (
     <div className='grid grid-cols-12 flex flex-col h-screen'>
-      <div className="outline col-span-3">
+      <div className="outline col-span-3 max-h-screen overflow-auto">
         <Controlpanel/>
         <Searchbar/>
+        <Contactbox/>
       </div>
     </div>
   );
