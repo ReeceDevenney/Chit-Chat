@@ -4,8 +4,8 @@ import Contactbox from "../Contactbox";
 
 function Sidebar() {
   return (
-    <div className='grid grid-cols-12 flex flex-col h-screen'>
-      <div className="outline col-span-3 max-h-screen overflow-auto">
+    <div className='col-span-3 flex flex-col h-screen'>
+      <div className="outline max-h-screen overflow-auto">
         <Controlpanel/>
         <Searchbar/>
         <Contactbox/>
