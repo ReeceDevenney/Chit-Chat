@@ -1,7 +1,7 @@
 package db
 
 import (
-	"context"
+	"errors"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -10,7 +10,7 @@ import (
 type Db struct {
 	Connection   *gorm.DB
 	FileLocation string
-	User         *context.Context
+	User         *User
 }
 
 type Message struct {
@@ -24,10 +24,14 @@ type User struct {
 	gorm.Model
 	Un     string
 	Pw     string
-	HashPw []byte
+	HashPw string
 }
 
 func (d *Db) Connect() error {
+	if d.FileLocation == "" {
+		return errors.New("File location required to open database.")
+	}
+
 	conn, err := gorm.Open(sqlite.Open(d.FileLocation), &gorm.Config{})
 	if err != nil {
 		return err
@@ -46,6 +50,7 @@ func (d *Db) CreateMessage(msg *Message) {
 }
 
 func (d *Db) CreateUser(u *User) {
-	// TODO: hash password
+	// TODO: Ensure that name is available
+	// TODO: Ensure that password is valid
 	d.Connection.Create(u)
 }

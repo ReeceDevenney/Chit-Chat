@@ -1,52 +1,24 @@
 package util
 
 import (
-	"encoding/json"
-	"errors"
-	"strconv"
+	"crypto/sha256"
+	"fmt"
 
 	"github.com/ReeceDevenney/Chit-Chat/db"
 	"github.com/gofiber/fiber/v2"
 )
 
-// Parse incoming message informaiton into a usable message object
-func ParseMessage(c *fiber.Ctx) (db.Message, error) {
-	msgBuf := make(map[string]string)
+type State struct {
+	App    *fiber.App
+	DbConn *db.Db
+}
 
-	json.Unmarshal([]byte(c.Body()), &msgBuf)
+func Hasher(s string) string {
+	h := sha256.New()
+	h.Write([]byte(s))
+	hashed := h.Sum(nil)
 
-	var msg db.Message
+	hString := fmt.Sprintf("%x\n", hashed)
 
-	msgBody, msgPrs := msgBuf["message"]
-	if !msgPrs {
-		return msg, errors.New("`message` field required in body")
-	}
-
-	msgTo, toPrs := msgBuf["to"]
-	if !toPrs {
-		return msg, errors.New("`to` field required in body")
-	}
-
-	msgToParse, err := strconv.Atoi(msgTo)
-	if err != nil {
-		panic(err)
-	}
-
-	msgFrom, fromPrs := msgBuf["to"]
-	if !fromPrs {
-		return msg, errors.New("`from` field required in body")
-	}
-
-	msgFromParse, err := strconv.Atoi(msgFrom)
-	if err != nil {
-		panic(err)
-	}
-
-	msg = db.Message{
-		Message: msgBody,
-		To:      uint(msgToParse),
-		From:    uint(msgFromParse),
-	}
-
-	return msg, nil
+	return hString
 }

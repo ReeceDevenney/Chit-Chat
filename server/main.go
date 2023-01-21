@@ -1,37 +1,36 @@
 package main
 
 import (
-	"context"
 	"flag"
 	"fmt"
 
 	"github.com/ReeceDevenney/Chit-Chat/db"
 	"github.com/ReeceDevenney/Chit-Chat/routes"
+	"github.com/ReeceDevenney/Chit-Chat/util"
 	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
 	// "globals"
 	// path to db file
-	dbPath := flag.String("db-path", "", "File name and location for local db")
+	dbPath := flag.String("db-path", "test.db", "File name and location for local db")
 	flag.Parse()
 
 	// server app
 	app := fiber.New()
 
-	// user context
-	userCtx := context.Background()
+	user := db.User{}
 
 	// db connection
 	dbConn := db.Db{
 		FileLocation: *dbPath,
-		User:         &userCtx,
+		User:         &user,
 	}
 
-	u := db.User{
-		Pw: "asdf",
+	state := util.State{
+		App:    app,
+		DbConn: &dbConn,
 	}
-	dbConn.CreateUser(&u)
 
 	err := dbConn.Connect()
 	if err != nil {
@@ -41,7 +40,7 @@ func main() {
 	}
 
 	// setup routes
-	routes.SetRoutes(app, &dbConn)
+	routes.SetRoutes(state)
 
 	app.Listen("localhost:5000")
 }
