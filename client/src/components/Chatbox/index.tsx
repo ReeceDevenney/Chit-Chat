@@ -37,27 +37,47 @@ const messages: Messages[] = [
     fromMe: false
   },
   {
-    message: "test message 7",
+    message: "test message 8",
     sendDate: "Fri, 8:00 AM",
     fromMe: true
   },
   {
-    message: "test message 7",
+    message: "test message 9",
     sendDate: "Fri, 8:00 AM",
     fromMe: true
   },
   {
-    message: "test message 7",
+    message: "test message 10",
+    sendDate: "Fri, 8:00 AM",
+    fromMe: false
+  },
+  {
+    message: "test message 11",
     sendDate: "Fri, 8:00 AM",
     fromMe: true
   },
   {
-    message: "test message 7",
+    message: "test message 12",
     sendDate: "Fri, 8:00 AM",
     fromMe: true
   },
   {
-    message: "test message 7",
+    message: "test message 13",
+    sendDate: "Fri, 8:00 AM",
+    fromMe: false
+  },
+  {
+    message: "test message 14",
+    sendDate: "Fri, 8:00 AM",
+    fromMe: true
+  },
+  {
+    message: "test message 15",
+    sendDate: "Fri, 8:00 AM",
+    fromMe: false
+  },
+  {
+    message: "test message 16",
     sendDate: "Fri, 8:00 AM",
     fromMe: true
   },
@@ -66,7 +86,10 @@ const messages: Messages[] = [
 function Chatbox() {
   return (
     <div className="col-span-9 h-screen flex flex-col justify-end">
-      <div className="text-left mb-6 flex flex-col-reverse overflow-auto">
+      <div className="h-20 border-b-2 border-black bg-slate-100 ml-[3px]">
+        <div className="text-center font-bold text-2xl">Test Name</div>
+      </div>
+      <div className="text-left mb-6 pt-2 flex flex-col-reverse overflow-auto">
         {messages.map(message =>
         message.fromMe? 
         <div>
@@ -79,18 +102,6 @@ function Chatbox() {
         </div> 
           )}
       </div>
-      
-      {/*<div className="text-left mb-6 flex flex-col">
-        <div>
-          <p className="flex flex-col items-end mr-12 rounded-lg bg-slate-300 ml-auto px-6 max-w-4xl flex-wrap">mess age 1mess age 1mess age1 mess age1m essage1me ssage1mes sage sage1m essage 1messa ge1mes 1message1 message 1message1me ssage1messa ge1message</p>
-          <p className="flex flex-col items-end mr-12 mb-8 ml-auto px-6 max-w-4xl flex-wrap">Fri, 5:35 AM</p>
-        </div>
-        <div>
-          <p className="flex flex-col items-start ml-12 rounded-lg bg-slate-300 mr-auto px-6 max-w-screen-sm flex-wrap">message2 asdf text-starttext-starttext-start age 1message 1message1 message1m essage1me ssage1mes </p>
-          <p className="flex flex-col items-start ml-12 mb-8 mr-auto px-6 max-w-screen-sm flex-wrap">Fri, 5:36 AM</p>
-        </div>
-        <p className="flex flex-col items-end mr-12 mb-8 rounded-lg bg-slate-300 ml-auto px-6 w-fit max-w-screen-sm flex-wrap">message1 testing some testing stuff</p>
-      </div> */}
       <div className="text-center mb-6">
         <textarea className="border border-slate-600 p-2 w-11/12 focus:outline-none rounded-2xl resize-none text-sm left-1/3 col-span-9"></textarea>
       </div>
