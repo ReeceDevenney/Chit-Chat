@@ -60,9 +60,9 @@ function Contactbox() {
         },
     ] 
     return(
-        <div className="flex-1">
+        <div className="flex-0 h-full z-0">
         {messages.map((message) => 
-        <div className="text-center hover:bg-slate-100 hover:cursor-pointer h-20 flex">
+        <div className="text-center hover:bg-slate-100 hover:cursor-pointer h-20 flex z-10">
           <div className="bg-gray-300 rounded-full h-14 w-14 my-auto ml-4 items-center flex shrink-0">
             <div className="mx-auto font-bold text-3xl">{message.name[0]}</div>
           </div>
